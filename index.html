@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Octaviano Dian Pratama | OCTA.dev</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Eksternal (Sesuai struktur folder assets/css/) -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* Tambahan CSS khusus untuk fitur baru agar langsung menawan */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: var(--primary-dark);
+        }
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        @media(max-width: 768px) {
+            .certificate-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preloader"><div class="loader"></div></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Cursor Glow Element -->
+    <div id="cursor-glow"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" title="Kembali ke atas">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <header class="header" id="main-header">
+        <div class="container header-container">
+            <a href="#beranda" class="brand">
+                <i class="fa-solid fa-code"></i>
+                OCTA.dev
+            </a>
+            
+            <nav class="nav-links" id="main-nav">
+                <a href="#beranda" class="nav-item active"><i class="fa-solid fa-house"></i> Beranda</a>
+                <a href="#tentang" class="nav-item"><i class="fa-solid fa-user"></i> Profil</a>
+                <a href="#jaringan" class="nav-item"><i class="fa-solid fa-network-wired"></i> Jaringan</a>
+                <a href="#iot" class="nav-item"><i class="fa-solid fa-microchip"></i> IoT</a>
+                <a href="#proyek" class="nav-item"><i class="fa-solid fa-folder-open"></i> Proyek</a>
+                <a href="#sertifikat" class="nav-item"><i class="fa-solid fa-certificate"></i> Sertifikat</a>
+                <a href="#kontak" class="nav-item"><i class="fa-solid fa-envelope"></i> Kontak</a>
+                
+                <button id="theme-toggle" class="btn btn-outline" style="padding: 0.5rem; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-left: 10px;" title="Ganti Tema">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="beranda" class="page-section active">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text reveal">
+                        <span class="badge" style="margin-bottom: 1.5rem;">
+                            <i class="fa-solid fa-rocket"></i> Portofolio Informatika Gacor
+                        </span>
+                        <h1 class="hero-title">
+                            Halo, Saya <br>
+                            <span class="text-gradient">Octaviano Dian</span>
+                        </h1>
+                        <div class="hero-subtitle">
+                            Seorang <span id="typed-text"></span><span class="cursor"></span>
+                        </div>
+                        <p class="hero-desc">
+                            Siswa Kelas XII Peminatan RPL / Informatika di SMAN 2 Mojokerto. Antusias dalam merancang antarmuka web modern, merakit topologi jaringan, dan bereksperimen dengan Internet of Things.
+                        </p>
+                        
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="#proyek" class="btn btn-primary" onclick="handleLinkClick(event, '#proyek')">
+                                <i class="fa-solid fa-compass"></i> Eksplorasi Karya
+                            </a>
+                            <a href="#kontak" class="btn btn-outline" onclick="handleLinkClick(event, '#kontak')">
+                                <i class="fa-solid fa-handshake"></i> Hubungi Saya
+                            </a>
+                        </div>
+
+                        <div class="skills-wrap reveal delay-1">
+                            <p>Tech Stack & Keahlian Inti</p>
+                            <div class="skill-tags">
+                                <span class="skill-tag"><i class="fa-brands fa-html5" style="color:#E34F26;"></i> HTML/CSS</span>
+                                <span class="skill-tag"><i class="fa-brands fa-js" style="color:#F7DF1E;"></i> JavaScript</span>
+                                <span class="skill-tag"><i class="fa-solid fa-network-wired" style="color:var(--accent);"></i> Cisco PT</span>
+                                <span class="skill-tag"><i class="fa-solid fa-microchip" style="color:#10B981;"></i> Arduino (C++)</span>
+                                <span class="skill-tag"><i class="fa-brands fa-figma" style="color:#F24E1E;"></i> Figma UI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual reveal delay-2">
+                        <div class="blob"></div>
+                        <div class="hero-img-box">
+                            <img src="assets/img/pp.jpg" alt="Foto Profil Octaviano Dian">
+                        </div>
+                        
+                        <div class="float-box float-1">
+                            <i class="fa-solid fa-code-branch"></i>
+                            <div>
+                                <span>15+</span>
+                                <small>Mini Proyek</small>
+                            </div>
+                        </div>
+                        <div class="float-box float-2">
+                            <i class="fa-solid fa-award"></i>
+                            <div>
+                                <span>Grade A</span>
+                                <small>Praktikum Lab</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tentang" class="page-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Tentang Saya</h2>
+                    <p>Mengenal lebih dekat profil, latar belakang, dan minat komprehensif saya di bidang teknologi.</p>
+                </div>
+
+                <div class="bento-grid">
+                    <div class="card bento-bio reveal delay-1">
+                        <div>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-address-card"></i> Identitas Diri
+                            </h3>
+                            <p style="color: var(--text-muted);">Saya adalah individu yang adaptif dan selalu haus akan pengetahuan baru, terutama di bidang rekayasa perangkat lunak dan infrastruktur jaringan.</p>
+                        </div>
+                        
+                        <table class="bio-table">
+                            <tr>
+                                <th>Nama Lengkap</th>
+                                <td>Octaviano Dian Pratama</td>
+                            </tr>
+                            <tr>
+                                <th>TTL</th>
+                                <td>Mojokerto, 15 Oktober 2008</td>
+                            </tr>
+                            <tr>
+                                <th>Asal Sekolah</th>
+                                <td>SMAN 2 Mojokerto</td>
+                            </tr>
+                            <tr>
+                                <th>Minat Karir</th>
+                                <td>Fullstack Developer / Network Engineer</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="card bento-photo reveal delay-2">
+                        <img src="https://placehold.co/600x800/E2E8F0/475569?text=Lab+Komputer" alt="Praktikum Komputer">
+                    </div>
+                    
+                    <div class="card bento-education reveal delay-3">
+                        <i class="fa-solid fa-graduation-cap" style="font-size: 2.5rem; margin-bottom: 1rem; color: rgba(255,255,255,0.9);"></i>
+                        <h3>Pendidikan</h3>
+                        <p style="margin-top: 10px; color: rgba(255,255,255,0.9); font-weight: 500; font-size: 0.95rem;">
+                            Kelas XII<br>
+                            Peminatan Informatika / RPL<br>
+                            Tahun Ajaran 2026/2027
+                        </p>
+                    </div>
+
+                    <div class="card bento-hobbies reveal delay-1">
+                        <h4 style="color: var(--primary-dark);">Di Luar Coding</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Aktivitas keseimbangan hidup.</p>
+                        <div class="hobby-icons">
+                            <i class="fa-solid fa-book-open-reader" title="Membaca Artikel Tech"></i>
+                            <i class="fa-solid fa-chess-knight" title="Game Strategi"></i>
+                            <i class="fa-solid fa-music" title="Mendengarkan Musik"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="jaringan" class="page-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Infrastruktur Jaringan</h2>
+                    <p>Pemahaman topologi, pengalamatan IP, dan simulasi konektivitas menggunakan Cisco Packet Tracer.</p>
+                </div>
+
+                <div class="module-grid">
+                    <div class="card reveal delay-1">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                            <h3 style="color:var(--primary);"><i class="fa-solid fa-sitemap"></i> Simulasi Koneksi (ICMP)</h3>
+                            <span class="badge" style="background: rgba(16,185,129,0.1); color: #10B981;">Interaktif</span>
+                        </div>
+                        
+                        <div class="network-sim-container">
+                            <div class="net-line"></div>
+                            <div class="net-packet" id="ping-packet"></div>
+                            
+                            <div class="net-node">
+                                <div class="net-icon"><i class="fa-solid fa-laptop"></i></div>
+                                <span class="net-label">PC 01 (192.168.1.2)</span>
+                            </div>
+                            <div class="net-node">
+                                <div class="net-icon" style="border-radius: 8px;"><i class="fa-solid fa-ethernet"></i></div>
+                                <span class="net-label">Switch Utama</span>
+                            </div>
+                            <div class="net-node">
+                                <div class="net-icon"><i class="fa-solid fa-server"></i></div>
+                                <span class="net-label">Server (192.168.1.10)</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Tekan tombol untuk uji Ping</p>
+                            <button id="btn-ping" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                                <i class="fa-solid fa-terminal"></i> Jalankan Ping
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card reveal delay-2">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <h3 style="color:var(--primary);"><i class="fa-solid fa-calculator"></i> Mini Subnet Calculator</h3>
+                            <span class="badge" style="background: rgba(37,99,235,0.1); color: var(--accent);">Alat Praktikum</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Uji cepat CIDR Prefix Network IPv4.</p>
+                        
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <select id="cidr-select" class="form-control" style="padding: 0.5rem;">
+                                <option value="/24">/24 (255.255.255.0 - 254 Host)</option>
+                                <option value="/25">/25 (255.255.255.128 - 126 Host)</option>
+                                <option value="/26">/26 (255.255.255.192 - 62 Host)</option>
+                                <option value="/28">/28 (255.255.255.240 - 14 Host)</option>
+                            </select>
+                            <button id="btn-calc" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Cek</button>
+                        </div>
+                        <div id="subnet-result" style="background: var(--bg-body); padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.85rem; font-family: 'Fira Code', monospace; color: var(--primary);">
+                            > Pilih CIDR untuk melihat detail subnet.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="iot" class="page-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Internet of Things (IoT)</h2>
+                    <p>Integrasi hardware dan software, memprogram mikrokontroler Arduino untuk otomatisasi.</p>
+                </div>
+
+                <div class="module-grid">
+                    <div class="card reveal delay-1">
+                        <h3 style="color:var(--primary); margin-bottom: 1.5rem;"><i class="fa-solid fa-lightbulb"></i> Smart Light Controller</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                            Simulasi kontrol aktuator (Relay/Lampu) menggunakan mikrokontroler. Coba tekan *toggle* di bawah ini.
+                        </p>
+                        
+                        <div class="iot-panel" id="iot-simulator">
+                            <i class="fa-regular fa-lightbulb iot-icon"></i>
+                            <h4 style="margin-bottom: 1rem; color: var(--text-heading);">Status Ruangan: <span id="iot-status-text">Gelap</span></h4>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="iot-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="terminal-log" id="iot-log">
+                            > Sistem IoT Siap...<br>
+                            > Menunggu perintah...
+                        </div>
+                    </div>
+
+                    <div class="card reveal delay-2" style="background: var(--bg-body);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <h3 style="color:var(--primary);"><i class="fa-solid fa-music"></i> Lo-Fi Code Vibes</h3>
+                            <button id="btn-music" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+                                <i class="fa-solid fa-play"></i> Putar Musik
+                            </button>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Generator melodi santai sintetis berbasis Web Audio API (Tanpa file eksternal).</p>
+                        
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-controls">
+                                    <div class="mac-btn close"></div>
+                                    <div class="mac-btn min"></div>
+                                    <div class="mac-btn max"></div>
+                                </div>
+                                <span class="code-title">smart_relay.ino</span>
+                            </div>
+                            <div class="code-content">
+<pre><code><span class="token keyword">int</span> relayPin <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token keyword">bool</span> lampState <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">pinMode</span><span class="token punctuation">(</span>relayPin<span class="token punctuation">,</span> OUTPUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class">Serial</span><span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token number">9600</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">receiveSignal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> HIGH<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>relayPin<span class="token punctuation">,</span> HIGH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class">Serial</span><span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Lampu ON"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>relayPin<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyek" class="page-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Galeri Karya</h2>
+                    <p>Beberapa proyek tugas sekolah dan eksperimen pribadi yang pernah saya kerjakan.</p>
+                </div>
+
+                <div class="project-grid">
+                    <div class="card project-card reveal delay-1">
+                        <div class="project-img">
+                            <img src="https://placehold.co/800x600/1E3A8A/FFFFFF?text=Web+Portofolio" alt="Web Portofolio">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-primary" onclick="alert('Ini adalah web yang sedang Anda lihat sekarang!')"><i class="fa-solid fa-eye"></i> Detail Proyek</a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Web Development</span>
+                            <h3 class="project-title">Website Portofolio Premium</h3>
+                            <p class="project-desc">
+                                Membangun antarmuka web interaktif menggunakan HTML, CSS modern, dan Vanilla JavaScript tanpa framework.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card project-card reveal delay-2">
+                        <div class="project-img">
+                            <img src="https://placehold.co/800x600/0F172A/3B82F6?text=UI+Perpus+Sekolah" alt="Desain UI/UX">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> Detail Proyek</a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">UI/UX Design</span>
+                            <h3 class="project-title">Prototipe UI E-Library</h3>
+                            <p class="project-desc">
+                                Merancang wireframe dan prototipe interaktif aplikasi perpustakaan sekolah SMAN 2 Mojokerto menggunakan Figma dengan fokus pada UX pelajar.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card project-card reveal delay-3">
+                        <div class="project-img">
+                            <img src="https://placehold.co/800x600/10B981/FFFFFF?text=Smart+Plant+Watering" alt="IoT Project">
+                            <div class="project-overlay">
+                                <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> Detail Proyek</a>
+                            </div>
+                        </div>
+                        <div class="project-body">
+                            <span class="project-category">Internet of Things</span>
+                            <h3 class="project-title">Smart Plant Watering</h3>
+                            <p class="project-desc">
+                                Sistem penyiram tanaman otomatis berbasis Arduino Uno dan Sensor Kelembaban Tanah.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Baru: Sertifikat & Penghargaan -->
+        <section id="sertifikat" class="page-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Sertifikat & Prestasi</h2>
+                    <p>Bukti dedikasi dan pencapaian akademik di bidang teknologi informasi.</p>
+                </div>
+
+                <div class="certificate-grid">
+                    <div class="card reveal delay-1" style="display: flex; gap: 1.5rem; align-items: center;">
+                        <div style="font-size: 3rem; color: var(--primary); background: rgba(37,99,235,0.1); padding: 1.5rem; border-radius: var(--radius-sm);">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <span class="project-category">Cisco Networking Academy</span>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 5px;">Introduction to Networks</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Kelulusan modul dasar perutean dan pensakelaran jaringan komputer.</p>
+                        </div>
+                    </div>
+
+                    <div class="card reveal delay-2" style="display: flex; gap: 1.5rem; align-items: center;">
+                        <div style="font-size: 3rem; color: #10B981; background: rgba(16,185,129,0.1); padding: 1.5rem; border-radius: var(--radius-sm);">
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                        <div>
+                            <span class="project-category">Sekolah SMAN 2 Mojokerto</span>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 5px;">Juara 1 Lomba Web Design Antar Kelas</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Penghargaan atas pembuatan landing page profil sekolah kreatif.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontak" class="page-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Mari Terhubung</h2>
+                    <p>Tertarik untuk berkolaborasi, berdiskusi soal teknologi, atau menyapa? Kirimkan pesan Anda!</p>
+                </div>
+
+                <div class="contact-layout">
+                    <div class="reveal delay-1">
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--primary-dark);">Informasi Kontak</h3>
+                        <p style="color: var(--text-muted);">Jangan ragu untuk menghubungi saya melalui formulir di samping, atau melalui kontak langsung di bawah ini untuk respon yang lebih cepat.</p>
+                        
+                        <div class="contact-info-list">
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div class="contact-text">
+                                    <h4>Email Edukasi</h4>
+                                    <p>siswa.octa@sman2mojokerto.sch.id</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="contact-text">
+                                    <h4>Lokasi Belajar</h4>
+                                    <p>SMAN 2 Mojokerto<br>Jawa Timur, Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card reveal delay-2">
+                        <div id="form-message" class="alert-success">
+                            <i class="fa-solid fa-circle-check"></i> Pesan Anda telah meluncur sukses! Saya akan merespons secepatnya.
+                        </div>
+
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="nama" class="form-label">Nama Lengkap</label>
+                                <input type="text" id="nama" class="form-control" placeholder="Masukkan nama Anda" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Alamat Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="nama@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subjek" class="form-label">Topik Pembicaraan</label>
+                                <select id="subjek" class="form-control" required>
+                                    <option value="" disabled selected>Pilih topik...</option>
+                                    <option value="Pertanyaan">Diskusi / Tanya Jawab</option>
+                                    <option value="Kolaborasi">Kolaborasi Proyek</option>
+                                    <option value="Tugas">Tugas Sekolah</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pesan" class="form-label">Pesan Anda</label>
+                                <textarea id="pesan" class="form-control" placeholder="Tuliskan detail pesan Anda di sini..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <i class="fa-solid fa-paper-plane"></i> Kirim Pesan Sekarang
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3 style="font-weight: 800; font-size: 1.8rem; margin-bottom: 0.5rem; color: white; letter-spacing: -1px;">OCTA<span style="color: var(--accent-light);">.dev</span></h3>
+                    <p style="color: rgba(255,255,255,0.7); max-width: 320px; font-size: 0.95rem;">
+                        Portofolio digital siswa SMAN 2 Mojokerto. Menulis kode, merakit jaringan, merancang masa depan.
+                    </p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank" aria-label="Github" title="Github"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p class="copyright">&copy; 2026 Octaviano Dian Pratama. Hak Cipta Dilindungi.</p>
+                <p class="copyright">Crafted with <i class="fa-solid fa-heart" style="color: #EF4444; margin: 0 4px;"></i> & Logic.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function handleLinkClick(e, hash) {
+            e.preventDefault();
+            window.location.hash = hash;
+        }
+
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if(preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 500);
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const prog = document.getElementById('scroll-progress');
+            if(prog) prog.style.width = scrolled + '%';
+        });
+
+        // Back to top logic
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            function handleNavigation() {
+                let hash = window.location.hash || '#beranda';
+
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                    section.style.display = 'none'; 
+                });
+
+                document.querySelectorAll('.nav-item').forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                const targetSection = document.querySelector(hash);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    setTimeout(() => {
+                        targetSection.classList.add('active');
+                        triggerReveal(targetSection);
+                    }, 20);
+                    
+                    const activeLink = document.querySelector(`.nav-item[href="${hash}"]`);
+                    if(activeLink) activeLink.classList.add('active');
+                } else {
+                    const defaultSection = document.getElementById('beranda');
+                    defaultSection.style.display = 'block';
+                    setTimeout(() => {
+                        defaultSection.classList.add('active');
+                        triggerReveal(defaultSection);
+                    }, 20);
+                    document.querySelector(`.nav-item[href="#beranda"]`).classList.add('active');
+                }
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            const themeToggle = document.getElementById('theme-toggle');
+            const icon = themeToggle.querySelector('i');
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                }
+            });
+
+            handleNavigation();
+            window.addEventListener('hashchange', handleNavigation);
+
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            function triggerReveal(section) {
+                const reveals = section.querySelectorAll('.reveal');
+                reveals.forEach(el => {
+                    el.classList.add('active');
+                });
+            }
+
+            const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            const typedTextSpan = document.getElementById("typed-text");
+            const words = ["Web Developer", "Network Explorer", "IoT Enthusiast", "Siswa RPL"];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            
+            function type() {
+                const currentWord = words[wordIndex];
+                if(isDeleting) {
+                    typedTextSpan.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typedTextSpan.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let typingSpeed = isDeleting ? 50 : 100;
+
+                if(!isDeleting && charIndex === currentWord.length) {
+                    typingSpeed = 2000;
+                    isDeleting = true;
+                } else if(isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    typingSpeed = 500;
+                }
+
+                setTimeout(type, typingSpeed);
+            }
+            setTimeout(type, 1000);
+
+            const btnPing = document.getElementById('btn-ping');
+            const pingPacket = document.getElementById('ping-packet');
+            
+            if(btnPing) {
+                btnPing.addEventListener('click', () => {
+                    if(pingPacket.classList.contains('anim-ping')) return;
+                    
+                    btnPing.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Pinging...';
+                    pingPacket.classList.add('anim-ping');
+                    
+                    setTimeout(() => {
+                        pingPacket.classList.remove('anim-ping');
+                        btnPing.innerHTML = '<i class="fa-solid fa-check"></i> Ping Sukses (0ms)';
+                        btnPing.classList.replace('btn-primary', 'btn-outline');
+                        
+                        setTimeout(() => {
+                            btnPing.innerHTML = '<i class="fa-solid fa-terminal"></i> Jalankan Ping';
+                            btnPing.classList.replace('btn-outline', 'btn-primary');
+                        }, 3000);
+                    }, 1000);
+                });
+            }
+
+            // Subnet Calculator Interaktif
+            const btnCalc = document.getElementById('btn-calc');
+            const cidrSelect = document.getElementById('cidr-select');
+            const subnetResult = document.getElementById('subnet-result');
+
+            if(btnCalc) {
+                btnCalc.addEventListener('click', () => {
+                    const val = cidrSelect.value;
+                    let mask = '', hosts = '';
+                    if(val === '/24') { mask = '255.255.255.0'; hosts = '254 Host Usable'; }
+                    else if(val === '/25') { mask = '255.255.255.128'; hosts = '126 Host Usable'; }
+                    else if(val === '/26') { mask = '255.255.255.192'; hosts = '62 Host Usable'; }
+                    else if(val === '/28') { mask = '255.255.255.240'; hosts = '14 Host Usable'; }
+                    subnetResult.innerHTML = `Subnet Mask: <b>${mask}</b><br>Kapasitas: <span style="color:#10B981">${hosts}</span>`;
+                });
+            }
+
+            // Lo-Fi Ambient Synthesizer menggunakan Web Audio API murni
+            let audioCtx = null;
+            let isPlayingMusic = false;
+            let musicInterval = null;
+
+            const btnMusic = document.getElementById('btn-music');
+            if(btnMusic) {
+                btnMusic.addEventListener('click', () => {
+                    if(!isPlayingMusic) {
+                        if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        if(audioCtx.state === 'suspended') audioCtx.resume();
+
+                        isPlayingMusic = true;
+                        btnMusic.innerHTML = '<i class="fa-solid fa-pause"></i> Matikan Musik';
+                        btnMusic.classList.replace('btn-outline', 'btn-primary');
+
+                        const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // Skala Pentatonic
+                        musicInterval = setInterval(() => {
+                            if(!isPlayingMusic) return;
+                            const osc = audioCtx.createOscillator();
+                            const gain = audioCtx.createGain();
+                            
+                            osc.type = 'sine';
+                            osc.frequency.value = notes[Math.floor(Math.random() * notes.length)];
+                            
+                            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.5);
+                            
+                            osc.connect(gain);
+                            gain.connect(audioCtx.destination);
+                            
+                            osc.start();
+                            osc.stop(audioCtx.currentTime + 1.5);
+                        }, 800);
+                    } else {
+                        isPlayingMusic = false;
+                        clearInterval(musicInterval);
+                        btnMusic.innerHTML = '<i class="fa-solid fa-play"></i> Putar Musik';
+                        btnMusic.classList.replace('btn-primary', 'btn-outline');
+                    }
+                });
+            }
+
+            const iotToggle = document.getElementById('iot-toggle');
+            const iotPanel = document.getElementById('iot-simulator');
+            const iotStatusText = document.getElementById('iot-status-text');
+            const iotLog = document.getElementById('iot-log');
+            const iotIcon = document.querySelector('.iot-icon');
+
+            if(iotToggle) {
+                iotToggle.addEventListener('change', function() {
+                    const time = new Date().toLocaleTimeString();
+                    if(this.checked) {
+                        iotPanel.classList.add('active-state');
+                        iotIcon.classList.replace('fa-regular', 'fa-solid');
+                        iotStatusText.textContent = "Terang (ON)";
+                        iotLog.innerHTML += `<br><span style="color:#fff;">[${time}]</span> Menerima sinyal HIGH...<br>> Relay: <span style="color:#10B981;">Lampu ON</span>`;
+                    } else {
+                        iotPanel.classList.remove('active-state');
+                        iotIcon.classList.replace('fa-solid', 'fa-regular');
+                        iotStatusText.textContent = "Gelap (OFF)";
+                        iotLog.innerHTML += `<br><span style="color:#fff;">[${time}]</span> Menerima sinyal LOW...<br>> Relay: <span style="color:#EF4444;">Lampu OFF</span>`;
+                    }
+                    iotLog.scrollTop = iotLog.scrollHeight;
+                });
+            }
+
+            const cursorGlow = document.getElementById('cursor-glow');
+            document.addEventListener('mousemove', (e) => {
+                cursorGlow.style.opacity = '1';
+                requestAnimationFrame(() => {
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                });
+            });
+            document.addEventListener('mouseleave', () => {
+                cursorGlow.style.opacity = '0';
+            });
+
+            const form = document.getElementById('contactForm');
+            const msgBox = document.getElementById('form-message');
+
+            if(form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const btn = this.querySelector('button[type="submit"]');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Mengirim Pesan...';
+                    btn.style.opacity = '0.7';
+                    
+                    setTimeout(() => {
+                        form.style.display = 'none';
+                        msgBox.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            form.reset();
+                            form.style.display = 'block';
+                            msgBox.style.display = 'none';
+                            btn.innerHTML = originalText;
+                            btn.style.opacity = '1';
+                        }, 5000);
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+    <!-- Script JS Eksternal -->
+    <script src="assets/js/script.js"></script>
+</body>
+</body>
+</html>
