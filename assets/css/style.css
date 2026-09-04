@@ -1410,3 +1410,122 @@ display: none;
         font-size: 1.2rem;
     }
 }
+/* Sembunyikan tombol hamburger di layar komputer/laptop */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-heading, #222);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* Khusus untuk HP / layar di bawah 768px */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block !important; /* Wajibkan tombol tampil di HP */
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-card, #ffffff);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        
+        /* Menu disembunyikan sebelum diklik */
+        display: none; 
+    }
+
+    /* Ketika menu aktif (setelah diklik lewat JS) */
+    .nav-links.show-mobile {
+        display: flex !important;
+    }
+}
+/* =========================================================
+   PENGATURAN WARNA KETIKA DARK MODE AKTIF
+========================================================= */
+[data-theme="dark"] {
+    --bg-card: #1f2937;
+    --text-main: #d1d5db;
+    --text-heading: #ffffff;
+    background-color: #111827 !important;
+    color: #f3f4f6 !important;
+}
+
+/* Memastikan elemen utama ikut berubah warna saat dark mode */
+[data-theme="dark"] body {
+    background-color: #111827 !important;
+    color: #f3f4f6 !important;
+}
+
+[data-theme="dark"] #main-header {
+    background-color: #1f2937 !important;
+    border-bottom: 1px solid #374151;
+}
+/* =========================================================
+   FIX FINAL: DARK MODE KOMPREHENSIF & MENYELURUH
+========================================================= */
+
+[data-theme="dark"] {
+    --bg-body: #090D16 !important;
+    --bg-card: #111827 !important;
+    --text-heading: #F8FAFC !important;
+    --text-muted: #94A3B8 !important;
+    --border-soft: #1E293B !important;
+}
+
+[data-theme="dark"] body {
+    background-color: var(--bg-body) !important;
+    color: var(--text-heading) !important;
+}
+
+/* Memperbaiki Header & Navigasi saat Dark Mode */
+[data-theme="dark"] .header,
+[data-theme="dark"] #main-header {
+    background-color: rgba(17, 24, 39, 0.9) !important;
+    border-bottom: 1px solid var(--border-soft) !important;
+}
+
+[data-theme="dark"] .logo,
+[data-theme="dark"] .nav-item,
+[data-theme="dark"] .mobile-menu-btn {
+    color: var(--text-heading) !important;
+}
+
+[data-theme="dark"] .nav-links {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-soft) !important;
+}
+
+/* Memperbaiki Kartu, Bento, dan Kotak Proyek */
+[data-theme="dark"] .card,
+[data-theme="dark"] .cert-card,
+[data-theme="dark"] .iot-panel,
+[data-theme="dark"] .form-control {
+    background-color: var(--bg-card) !important;
+    color: var(--text-heading) !important;
+    border-color: var(--border-soft) !important;
+}
+
+[data-theme="dark"] .hero-desc,
+[data-theme="dark"] .cert-desc,
+[data-theme="dark"] .project-desc,
+[data-theme="dark"] .section-header p,
+[data-theme="dark"] .bio-table th {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .bio-table td {
+    color: var(--text-heading) !important;
+}
+
+[data-theme="dark"] .bio-table th, 
+[data-theme="dark"] .bio-table td {
+    border-color: var(--border-soft) !important;
+}
