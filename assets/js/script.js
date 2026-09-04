@@ -48,20 +48,36 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', handleNavigation);
     handleNavigation();
 
-    // 3. Dark/Light Mode
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle?.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-            themeToggle.querySelector('i').className = 'fa-solid fa-moon';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            themeToggle.querySelector('i').className = 'fa-solid fa-sun';
-        }
-    });
+   // =========================================================
+// 3. Dark/Light Mode (Versi Aman & Lengkap)
+// =========================================================
+const themeToggle = document.getElementById('theme-toggle');
+
+// A. Terapkan tema yang tersimpan saat halaman pertama kali dimuat
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (themeToggle) {
+        const icon = themeToggle.querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-sun';
+    }
+}
+
+// B. Jalankan saat tombol diklik
+themeToggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const icon = themeToggle.querySelector('i');
+
+    if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        if (icon) icon.className = 'fa-solid fa-moon';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        if (icon) icon.className = 'fa-solid fa-sun';
+    }
+});
 
     // 4. Typing Effect
     const typedTextSpan = document.getElementById("typed-text");
@@ -107,4 +123,44 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         alert("Pesan terkirim! Terima kasih telah menghubungi.");
     });
+});
+// =========================================================
+// TAMBAHAN LOGIKA HAMBURGER MENU UNTUK TAMPILAN SMARTPHONE
+// =========================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('main-nav');
+    
+    if (hamburgerBtn && navMenu) {
+        // 1. Fungsi Toggle Menu (Buka / Tutup)
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show-mobile');
+            
+            // Ubah icon dari garis tiga (bars) menjadi silang (xmark)
+            const icon = hamburgerBtn.querySelector('i');
+            if (navMenu.classList.contains('show-mobile')) {
+                icon.className = 'fa-solid fa-xmark';
+            } else {
+                icon.className = 'fa-solid fa-bars';
+            }
+        });
+
+        // 2. Menutup Menu Otomatis ketika salah satu menu (nav-item) diklik
+        const navItems = navMenu.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navMenu.classList.remove('show-mobile');
+                hamburgerBtn.querySelector('i').className = 'fa-solid fa-bars';
+            });
+        });
+        
+        // 3. Menutup Menu saat layar di-scroll
+        window.addEventListener('scroll', () => {
+            if (navMenu.classList.contains('show-mobile')) {
+                navMenu.classList.remove('show-mobile');
+                hamburgerBtn.querySelector('i').className = 'fa-solid fa-bars';
+            }
+        });
+    }
 });
