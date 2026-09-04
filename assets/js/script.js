@@ -164,3 +164,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// Lo-Fi Ambient Synthesizer yang diperbarui
+let audioCtx = null;
+let isPlayingMusic = false;
+let musicInterval = null;
+
+const btnMusic = document.getElementById('btn-music');
+if(btnMusic) {
+    btnMusic.addEventListener('click', async () => {
+        if(!isPlayingMusic) {
+            if(!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            // Pastikan audio context benar-benar aktif (resume)
+            if(audioCtx.state === 'suspended') {
+                await audioCtx.resume();
+            }
+
+            isPlayingMusic = true;
+            btnMusic.innerHTML = '<i class="fa-solid fa-pause"></i> Matikan Musik';
+            btnMusic.classList.replace('btn-outline', 'btn-primary');
+
+            const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // Skala Pentatonic
+            musicInterval = setInterval(() => {
+                if(!isPlayingMusic || !audioCtx) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.value = notes[Math.floor(Math.random() * notes.length)];
+                
+                // Volume dinaikkan sedikit dari 0.05 ke 0.15 agar terdengar jelas
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.2);
+            }, 800);
+        } else {
+            isPlayingMusic = false;
+            clearInterval(musicInterval);
+            btnMusic.innerHTML = '<i class="fa-solid fa-play"></i> Putar Musik';
+            btnMusic.classList.replace('btn-primary', 'btn-outline');
+        }
+    });
+}
